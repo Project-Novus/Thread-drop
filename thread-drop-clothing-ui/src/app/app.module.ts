@@ -12,6 +12,7 @@ import { EliteLayoutComponent } from './layouts/elite-layout/elite-layout.compon
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { PremiumLayoutComponent } from './layouts/premium-layout/premium-layout.component';
 import { LuxuryLayoutComponent } from './layouts/luxury-layout/luxury-layout.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { LuxuryLayoutComponent } from './layouts/luxury-layout/luxury-layout.com
     SignatureLayoutComponent,
     EliteLayoutComponent,
     NavbarComponent,
+    FooterComponent,
     PremiumLayoutComponent,
     LuxuryLayoutComponent
   ],

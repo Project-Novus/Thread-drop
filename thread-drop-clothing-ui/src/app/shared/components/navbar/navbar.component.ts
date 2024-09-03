@@ -8,6 +8,7 @@ import { gsap } from 'gsap';
 })
 export class NavbarComponent implements OnInit,OnChanges {
   @Input() scroll: boolean = false;
+  @Input() option:string = '';
   @ViewChild('underline') underline!:ElementRef<HTMLElement>
   @ViewChild('underline2') underline2!:ElementRef<HTMLElement>
   @ViewChild('underline3') underline3!:ElementRef<HTMLElement>
