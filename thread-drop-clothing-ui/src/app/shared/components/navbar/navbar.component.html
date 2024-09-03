@@ -1,26 +1,33 @@
-<nav>
-    <div>
-        <button>
-            ESSENTIALS
+<nav class="flex z-10 justify-between nav text-white px-8 py-4 tablet:text-sm fixed top-0 w-full">
+    <div class="flex gap-4 w-[40%]" >
+        <button class="nav-elements border-black  p-2 group transition-all duration-300 ease-in-out" routerLink="/signature">
+            <span class="nav-underline-white"  #underline>
+                SIGNATURE
+            </span> 
         </button>
-        <button>
-            SIGNATURE
-        </button>
-        <button>
-            ELITE
-        </button>
-    </div>
-    <div>
-        <button class="text-yellow-50">
-            LOGO
+        <button class="nav-elements border-black  p-2 group transition-all duration-300 ease-in-out" routerLink="/luxury">
+           <span class="nav-underline-white"  #underline2>
+               LUXURY
+
+           </span> 
         </button>
     </div>
-    <div>
-        <button>
+    <div class="text-xl">
+        <button routerLink="/">
+            THREAD DROP
+        </button>
+    </div>
+    <div  class="flex justify-end gap-4 w-[40%]">
+        <button class="nav-elements border-black  p-2 group transition-all duration-300 ease-in-out" routerLink="/account">
+        <span class="nav-underline-white"  #underline3>
             ACCOUNT
+        </span>     
+        
         </button>
-        <button>
-            BAG
+        <button class="nav-elements border-black  p-2 group transition-all duration-300 ease-in-out" routerLink="/cart">
+           <span class="nav-underline-white"  #underline4>
+               BAG
+           </span>
         </button>
     </div>
 </nav>
