@@ -10,6 +10,8 @@ import { EssentialsLayoutComponent } from './layouts/essentials-layout/essential
 import { SignatureLayoutComponent } from './layouts/signature-layout/signature-layout.component';
 import { EliteLayoutComponent } from './layouts/elite-layout/elite-layout.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { PremiumLayoutComponent } from './layouts/premium-layout/premium-layout.component';
+import { LuxuryLayoutComponent } from './layouts/luxury-layout/luxury-layout.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
     EssentialsLayoutComponent,
     SignatureLayoutComponent,
     EliteLayoutComponent,
-    NavbarComponent
+    NavbarComponent,
+    PremiumLayoutComponent,
+    LuxuryLayoutComponent
   ],
   imports: [
     BrowserModule,
