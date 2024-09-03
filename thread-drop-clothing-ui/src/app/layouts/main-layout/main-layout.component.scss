@@ -8,16 +8,19 @@
     background-image: linear-gradient(to top, gold ,transparent);
     opacity: 0.3;
   }
-#section2::after {
-    content: '';
-    position: absolute;
-    // top: 0;
-    left: 0;
-    width: 100%;
-    height: 10%;
-    background-image: linear-gradient(to bottom, gold ,transparent);
-    opacity: 0.3;
-  }
+
+@media screen and (min-width: 768px){
+    #section2::after {
+        content: '';
+        position: absolute;
+        // top: 0;
+        left: 0;
+        width: 100%;
+        height: 10%;
+        background-image: linear-gradient(to bottom, gold ,transparent);
+        opacity: 0.3;
+      }
+}  
   
 #section2{
     background: var(--essentials-background-color);
