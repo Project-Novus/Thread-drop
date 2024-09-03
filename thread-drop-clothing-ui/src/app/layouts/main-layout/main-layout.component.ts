@@ -9,15 +9,28 @@ import { TextPlugin,ScrollTrigger } from 'gsap/all';
 export class MainLayoutComponent implements OnInit,AfterViewInit  {
   scroll:boolean = false;
   matchMedia:any;
-  @ViewChild('section1') section1!: ElementRef<HTMLElement>;
+  @ViewChild('section1',{read:ElementRef}) section1!: ElementRef<HTMLElement>;
   @ViewChild('section2') section2!: ElementRef<HTMLElement>;
   constructor() { 
     gsap.registerPlugin(TextPlugin,ScrollTrigger);  
     this.matchMedia=gsap.matchMedia();
   }
   ngAfterViewInit(): void {
+    gsap.fromTo('#bg',{
+      backgroundPosition: () => `50% ${-window.innerHeight * this.getRatio(this.section1.nativeElement)}px` 
+    }, {
+      backgroundPosition: () => `50% ${window.innerHeight * (1 - this.getRatio(this.section1.nativeElement))}px`,
+      ease: "none",
+      scrollTrigger: {
+        trigger: this.section1.nativeElement,
+        start: () => "top bottom",
+        end: "bottom top",
+        scrub: true,
+        invalidateOnRefresh: true // to make it responsive
+      }
+    })
   }
-
+  getRatio = (el:any) => window.innerHeight / (window.innerHeight + el.offsetHeight);
   ngOnInit(): void {
     //Large Screens
  
@@ -42,12 +55,7 @@ export class MainLayoutComponent implements OnInit,AfterViewInit  {
           }
         }
       })
-      gsap.to('#bg',{
-        scrollTrigger:{
-          scrub:0
-        },
-        y:'50%'
-      })
+   
      
       gsap.to('#title',{
         scrollTrigger:{
