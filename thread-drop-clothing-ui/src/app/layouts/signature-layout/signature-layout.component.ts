@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signature-layout.component.scss']
 })
 export class SignatureLayoutComponent implements OnInit {
-
+  option:string='signature';
   constructor() { }
 
   ngOnInit(): void {
