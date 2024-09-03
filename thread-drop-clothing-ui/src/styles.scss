@@ -3,7 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 @import 'globalVariables.scss';
-
+@font-face {
+    font-family: helvetica;
+    src: url(assets/helvetica.otf) format("opentype");
+  }
 body{
     font-family: var(--font-family);
 }
