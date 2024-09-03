@@ -61,8 +61,8 @@ export class MainLayoutComponent implements OnInit,AfterViewInit  {
         scrollTrigger:{
           scrub:0
         },
-        y:'400%',
-        // scale:1.7,
+        y:'300%',
+        scale:1.4,
       })
 
       gsap.from('#signatureImg',{
