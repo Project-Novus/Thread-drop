@@ -4,7 +4,17 @@
     background-repeat: no-repeat;
     transition: all 300ms ease-out;
 }
-
+.desktop-navbar{
+  transition: all 200ms ease-in;
+}
+.desktop-navbar:hover{
+  background-color: white !important;
+  color:black !important
+}
+.segment-navbar{
+  background-color: white !important;
+  color:black !important
+}
 .nav-underline-black {
     @include underline();
     background-image: linear-gradient(to right, #111827, #111827);
@@ -23,5 +33,5 @@
   }
   .text-underline{
     text-decoration: underline;
-    text-decoration-thickness:2px ;
+    text-decoration-thickness:1.5px ;
   }

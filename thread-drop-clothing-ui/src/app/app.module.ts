@@ -13,6 +13,7 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { PremiumLayoutComponent } from './layouts/premium-layout/premium-layout.component';
 import { LuxuryLayoutComponent } from './layouts/luxury-layout/luxury-layout.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { FiltersectionComponent } from './shared/components/filtersection/filtersection.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     NavbarComponent,
     FooterComponent,
     PremiumLayoutComponent,
-    LuxuryLayoutComponent
+    LuxuryLayoutComponent,
+    FiltersectionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,13 +1,14 @@
-<header class="tablet:block hidden">
-    <nav class="tablet:flex z-10 justify-between nav text-white px-8 py-4 tablet:text-sm fixed top-0 w-full">
+<header class="tablet:block hidden ">
+    <nav [ngClass]="{'segment-navbar': option.length}" 
+    class="tablet:flex z-10 desktop-navbar justify-between nav text-white px-8 py-4 tablet:text-sm fixed top-0 w-full">
         <div class="flex gap-4 w-[40%]" >
             <button [ngClass]="{'text-underline': option==='signature'}" class="nav-elements border-black  p-2 group transition-all duration-300 ease-in-out" routerLink="/signature">
-                <span class="nav-underline-white"  #underline>
+                <span class="nav-underline-black"  #underline>
                     SIGNATURE
                 </span> 
             </button>
             <button [ngClass]="{'text-underline': option==='luxury'}" class="nav-elements border-black  p-2 group transition-all duration-300 ease-in-out" routerLink="/luxury">
-               <span class="nav-underline-white"  #underline2>
+               <span class="nav-underline-black"  #underline2>
                    LUXURY
     
                </span> 
@@ -20,13 +21,13 @@
         </div>
         <div  class="flex justify-end gap-4 w-[40%]">
             <button [ngClass]="{'text-underline': option==='account'}" class="nav-elements border-black  p-2 group transition-all duration-300 ease-in-out" routerLink="/account">
-            <span class="nav-underline-white"  #underline3>
+            <span class="nav-underline-black"  #underline3>
                 ACCOUNT
             </span>     
             
             </button>
             <button [ngClass]="{'text-underline': option==='bag'}" class="nav-elements border-black  p-2 group transition-all duration-300 ease-in-out" routerLink="/cart">
-               <span class="nav-underline-white"  #underline4>
+               <span class="nav-underline-black"  #underline4>
                    BAG
                </span>
             </button>
@@ -35,7 +36,7 @@
 </header>
 
 <header class="tablet:hidden">
-    <nav class="flex flex-col items-center tablet:hidden z-10 justify-between nav text-white px-8 py-2 fixed top-0 w-full">
+    <nav [ngClass]="{'segment-navbar': option.length}" class="flex flex-col items-center tablet:hidden z-10 justify-between nav text-white px-8 py-2 fixed top-0 w-full">
         <div class="text-xl">
             <button routerLink="/">
                 THREAD DROP

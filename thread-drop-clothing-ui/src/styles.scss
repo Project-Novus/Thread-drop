@@ -17,3 +17,12 @@
   background: var(--signature-background-color);
   background: var(--signature-background-gradient-radial);
 }
+.no-outline-button{
+  padding: 0;
+  border: none;
+  background: none;
+  transition: all 100ms ease-in-out;
+}
+.no-outline-button:hover{
+  opacity: 0.8;
+}
