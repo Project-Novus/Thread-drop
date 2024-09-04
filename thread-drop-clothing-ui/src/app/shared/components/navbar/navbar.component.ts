@@ -37,23 +37,23 @@ export class NavbarComponent implements OnInit,OnChanges {
   ngOnInit(): void {
   }
   addBlackRemoveWhite(){
-      this.underline.nativeElement.classList.remove("nav-underline-white")
-      this.underline2.nativeElement.classList.remove("nav-underline-white")
-      this.underline3.nativeElement.classList.remove("nav-underline-white")
-      this.underline4.nativeElement.classList.remove("nav-underline-white")
-      this.underline.nativeElement.classList.add("nav-underline-black")
-      this.underline2.nativeElement.classList.add("nav-underline-black")
-      this.underline3.nativeElement.classList.add("nav-underline-black")
-      this.underline4.nativeElement.classList.add("nav-underline-black")
+      this.underline?.nativeElement?.classList.remove("nav-underline-white")
+      this.underline2?.nativeElement?.classList.remove("nav-underline-white")
+      this.underline3?.nativeElement?.classList.remove("nav-underline-white")
+      this.underline4?.nativeElement?.classList.remove("nav-underline-white")
+      this.underline?.nativeElement?.classList.add("nav-underline-black")
+      this.underline2?.nativeElement?.classList.add("nav-underline-black")
+      this.underline3?.nativeElement?.classList.add("nav-underline-black")
+      this.underline4?.nativeElement?.classList.add("nav-underline-black")
   }
   addWhiteRemoveBlack(){
-    this.underline.nativeElement.classList.remove("nav-underline-black")
-    this.underline2.nativeElement.classList.remove("nav-underline-black")
-    this.underline3.nativeElement.classList.remove("nav-underline-black")
-    this.underline4.nativeElement.classList.remove("nav-underline-black")
-    this.underline.nativeElement.classList.add("nav-underline-white")
-    this.underline2.nativeElement.classList.add("nav-underline-white")
-    this.underline3.nativeElement.classList.add("nav-underline-white")
-    this.underline4.nativeElement.classList.add("nav-underline-white")
+    this.underline?.nativeElement?.classList.remove("nav-underline-black")
+    this.underline2?.nativeElement?.classList.remove("nav-underline-black")
+    this.underline3?.nativeElement?.classList.remove("nav-underline-black")
+    this.underline4?.nativeElement?.classList.remove("nav-underline-black")
+    this.underline?.nativeElement?.classList.add("nav-underline-white")
+    this.underline2?.nativeElement?.classList.add("nav-underline-white")
+    this.underline3?.nativeElement?.classList.add("nav-underline-white")
+    this.underline4?.nativeElement?.classList.add("nav-underline-white")
   }
 }

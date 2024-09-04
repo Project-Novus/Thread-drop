@@ -16,19 +16,19 @@ export class MainLayoutComponent implements OnInit,AfterViewInit  {
     this.matchMedia=gsap.matchMedia();
   }
   ngAfterViewInit(): void {
-    gsap.fromTo('#bg',{
-      backgroundPosition: () => `50% ${-window.innerHeight * this.getRatio(this.section1.nativeElement)}px` 
-    }, {
-      backgroundPosition: () => `50% ${window.innerHeight * (1 - this.getRatio(this.section1.nativeElement))}px`,
-      ease: "none",
-      scrollTrigger: {
-        trigger: this.section1.nativeElement,
-        start: () => "top bottom",
-        end: "bottom top",
-        scrub: true,
-        invalidateOnRefresh: true // to make it responsive
-      }
-    })
+    // gsap.fromTo('#bg',{
+    //   backgroundPosition: () => `50% ${-window.innerHeight * this.getRatio(this.section1.nativeElement)}px` 
+    // }, {
+    //   backgroundPosition: () => `50% ${window.innerHeight * (1 - this.getRatio(this.section1.nativeElement))}px`,
+    //   ease: "none",
+    //   scrollTrigger: {
+    //     trigger: this.section1.nativeElement,
+    //     start: () => "top bottom",
+    //     end: "bottom top",
+    //     scrub: true,
+    //     invalidateOnRefresh: true // to make it responsive
+    //   }
+    // })
   }
   getRatio = (el:any) => window.innerHeight / (window.innerHeight + el.offsetHeight);
   ngOnInit(): void {
@@ -56,7 +56,12 @@ export class MainLayoutComponent implements OnInit,AfterViewInit  {
         }
       })
    
-     
+      gsap.to('#bg',{
+        scrollTrigger:{
+          scrub:0
+        },
+        y:'50%'
+      })
       gsap.to('#title',{
         scrollTrigger:{
           scrub:0
@@ -71,7 +76,6 @@ export class MainLayoutComponent implements OnInit,AfterViewInit  {
           end:"75% center"
         },
         y:'40%',
-        scale:0.7,
         opacity:0.5
       })
       gsap.from('#luxuryImg',{
@@ -79,9 +83,8 @@ export class MainLayoutComponent implements OnInit,AfterViewInit  {
           scrub:1,
           end:"75% center"
         },
-        y:'20%',
-        scale:0.6,
-        opacity:0.4
+        y:'40%',
+        opacity:0.5
       })   
   } 
 
