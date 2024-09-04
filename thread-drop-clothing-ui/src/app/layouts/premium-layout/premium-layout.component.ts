@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./premium-layout.component.scss']
 })
 export class PremiumLayoutComponent implements OnInit {
-
+  option:string="luxury"
   constructor() { }
 
   ngOnInit(): void {
