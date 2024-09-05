@@ -1,6 +1,7 @@
 export interface Product {
-    imgSrc: string;
+    productId: string;
+    productImg: string;
     productName: string;
-    productPrice: number;
+    productPrice: string;
     productSegment: string;
-}
+}[]
