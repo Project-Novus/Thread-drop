@@ -1,65 +1,22 @@
 <main class="flex flex-col gap-20 min-h-[100vh] hero-section">
     <app-navbar [option]="option"></app-navbar>
     <section class="flex flex-col items-center">
-        <div class="sticky top-[5.5vw] z-100 w-full py-10 bg-white border-b">
+        <div class="sticky top-[16vw]  xsm:top-[13.5vw] tablet-sm:top-[7.5vw] tablet:top-[5.5vw] laptop-sm:top-[3.5vw]  z-100 w-full py-6 tablet-sm:py-8 tablet:py-10 bg-white border-b">
            <app-filtersection></app-filtersection>
         </div>
-        <div class="overflow-hidden w-full gap-[2vw] p-[1vw] flex flex-col items-center  tablet-sm:grid tablet-sm:grid-cols-2 laptop-sm:grid-cols-3">
-            <ng-container>
-                <div class="min-w-[60vw] tablet-sm:min-w-[45vw] laptop-sm:min-w-[30vw] min-h-[70vw] tablet-sm:min-h-[55vw] laptop-sm:min-h-[40vw] border border-black ">
-
+        <div class="overflow-hidden w-full gap-[2vw] p-[6vw] tablet-sm:p-[4vw] laptop-sm:p-[2vw] flex flex-col items-center  tablet-sm:grid tablet-sm:grid-cols-2 laptop-sm:grid-cols-3">
+            <ng-container *ngFor="let product of productData">
+                <div class="flex flex-col justify-around min-w-[65vw] tablet-sm:min-w-[45vw] laptop-sm:min-w-[30vw] min-h-[80vw] tablet-sm:min-h-[60vw] laptop-sm:min-h-[40vw]  ">
+                    <img [src]="product.productImg" [alt]="product.productName" 
+                    class="h-full w-full">
+                    <div class="h-full text-lg">
+                        <div>{{product.productSegment}}</div>
+                        <div>{{product.productName}}</div>
+                        <div>{{product.productPrice}}</div>
+                    </div>
                 </div>
             </ng-container>
-            <ng-container>
-                <div class="min-w-[60vw] tablet-sm:min-w-[45vw] laptop-sm:min-w-[30vw] min-h-[70vw] tablet-sm:min-h-[55vw] laptop-sm:min-h-[40vw] border border-black ">
-
-                </div>
-            </ng-container>
-            <ng-container>
-                <div class="min-w-[60vw] tablet-sm:min-w-[45vw] laptop-sm:min-w-[30vw] min-h-[70vw] tablet-sm:min-h-[55vw] laptop-sm:min-h-[40vw] border border-black ">
-
-                </div>
-            </ng-container>
-            <ng-container>
-                <div class="min-w-[60vw] tablet-sm:min-w-[45vw] laptop-sm:min-w-[30vw] min-h-[70vw] tablet-sm:min-h-[55vw] laptop-sm:min-h-[40vw] border border-black ">
-
-                </div>
-            </ng-container>
-            <ng-container>
-                <div class="min-w-[60vw] tablet-sm:min-w-[45vw] laptop-sm:min-w-[30vw] min-h-[70vw] tablet-sm:min-h-[55vw] laptop-sm:min-h-[40vw] border border-black ">
-
-                </div>
-            </ng-container>
-            <ng-container>
-                <div class="min-w-[60vw] tablet-sm:min-w-[45vw] laptop-sm:min-w-[30vw] min-h-[70vw] tablet-sm:min-h-[55vw] laptop-sm:min-h-[40vw] border border-black ">
-
-                </div>
-            </ng-container>
-            <ng-container>
-                <div class="min-w-[60vw] tablet-sm:min-w-[45vw] laptop-sm:min-w-[30vw] min-h-[70vw] tablet-sm:min-h-[55vw] laptop-sm:min-h-[40vw] border border-black ">
-
-                </div>
-            </ng-container>
-            <ng-container>
-                <div class="min-w-[60vw] tablet-sm:min-w-[45vw] laptop-sm:min-w-[30vw] min-h-[70vw] tablet-sm:min-h-[55vw] laptop-sm:min-h-[40vw] border border-black ">
-
-                </div>
-            </ng-container>
-            <ng-container>
-                <div class="min-w-[60vw] tablet-sm:min-w-[45vw] laptop-sm:min-w-[30vw] min-h-[70vw] tablet-sm:min-h-[55vw] laptop-sm:min-h-[40vw] border border-black ">
-
-                </div>
-            </ng-container>
-            <ng-container>
-                <div class="min-w-[60vw] tablet-sm:min-w-[45vw] laptop-sm:min-w-[30vw] min-h-[70vw] tablet-sm:min-h-[55vw] laptop-sm:min-h-[40vw] border border-black ">
-
-                </div>
-            </ng-container>
-            <ng-container>
-                <div class="min-w-[60vw] tablet-sm:min-w-[45vw] laptop-sm:min-w-[30vw] min-h-[70vw] tablet-sm:min-h-[55vw] laptop-sm:min-h-[40vw] border border-black ">
-
-                </div>
-            </ng-container>
+            
             
         </div>
     </section>
