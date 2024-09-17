@@ -14,6 +14,7 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { LuxuryLayoutComponent } from './layouts/luxury-layout/luxury-layout.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { FiltersectionComponent } from './shared/components/filtersection/filtersection.component';
+import { ProductComponent } from './features/product/product.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FiltersectionComponent } from './shared/components/filtersection/filter
     NavbarComponent,
     FooterComponent,
     LuxuryLayoutComponent,
-    FiltersectionComponent
+    FiltersectionComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
