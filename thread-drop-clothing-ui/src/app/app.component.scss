@@ -1,0 +1,38 @@
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    overflow: hidden;
+  }
+  
+  .door {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: #111; /* Change this color based on your theme */
+    transition: transform 1s ease-in-out;
+  }
+  
+  /* Top door */
+  .door-top {
+    top: 0;
+    transform: translateY(0); /* Start position */
+  }
+  
+  /* Bottom door */
+  .door-bottom {
+    bottom: 0;
+    transform: translateY(0); /* Start position */
+  }
+  
+  /* Move doors off-screen after splash */
+  .splash-exit .door-top {
+    transform: translateY(-100%);
+  }
+  
+  .splash-exit .door-bottom {
+    transform: translateY(100%);
+  }

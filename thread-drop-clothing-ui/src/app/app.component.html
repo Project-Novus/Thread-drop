@@ -1,3 +1,11 @@
 <main>
+  <div class="splash-screen" *ngIf="isSplashVisible">
+    <div class="door door-top text-white text-8xl flex items-end justify-center">
+      THREAD
+    </div>
+    <div class="door door-bottom text-white text-8xl flex items-start justify-center">
+      DROP
+    </div>
+  </div>
   <router-outlet></router-outlet>
 </main>
