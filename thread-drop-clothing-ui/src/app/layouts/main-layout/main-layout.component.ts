@@ -75,7 +75,7 @@ export class MainLayoutComponent implements OnInit,AfterViewInit  {
           scrub:1,
           end:"75% center"
         },
-        y:'40%',
+        y:'15%',
         opacity:0.5
       })
       gsap.from('#luxuryImg',{
@@ -83,7 +83,7 @@ export class MainLayoutComponent implements OnInit,AfterViewInit  {
           scrub:1,
           end:"75% center"
         },
-        y:'40%',
+        y:'15%',
         opacity:0.5
       })   
   } 

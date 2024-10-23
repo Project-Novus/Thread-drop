@@ -15,7 +15,10 @@ import { LuxuryLayoutComponent } from './layouts/luxury-layout/luxury-layout.com
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { FiltersectionComponent } from './shared/components/filtersection/filtersection.component';
 import { ProductComponent } from './features/product/product.component';
-
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpLink } from 'apollo-angular/http';
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+import { InMemoryCache } from '@apollo/client/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,9 +34,26 @@ import { ProductComponent } from './features/product/product.component';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule,
+    ApolloModule
   ],
-  providers: [],
+  providers: [ {
+    provide: APOLLO_OPTIONS,
+    useFactory: (httpLink: HttpLink) => {
+      const uri = 'https://2bef72-db.myshopify.com/api/2023-07/graphql.json';
+      const headers = new HttpHeaders().set('X-Shopify-Storefront-Access-Token', '10e37673bbc15bcdc69d8c8e1686f214');
+
+      return {
+        cache: new InMemoryCache(),
+        link: httpLink.create({
+          uri,
+          headers
+        })
+      }
+    },
+    deps: [HttpLink]
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
