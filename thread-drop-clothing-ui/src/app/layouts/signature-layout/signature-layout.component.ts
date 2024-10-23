@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/core/models/productModel';
+import { ShopifyService } from 'src/app/core/services/shopify.service';
 
 @Component({
   selector: 'app-signature-layout',
@@ -9,25 +10,25 @@ import { Product } from 'src/app/core/models/productModel';
 })
 export class SignatureLayoutComponent implements OnInit {
   option:string='signature';
-  constructor(private router: Router) { }
+  constructor(private router: Router,private shopifyService:ShopifyService) { }
   productData:Product[]=[
     {
       productId:'1',
-      productImg:'https://bluorng.com/cdn/shop/files/IMG_7514.jpg?v=1718954874&width=600',
+      productImg:'https://thehouseofrare.com/cdn/shop/files/ZAVET-SRUSTCC07653.png?v=1721042369',
       productName:'Jacket for the poor',
       productSegment:'Signature',
       productPrice:'$3000'
     },
     {
       productId:'2',
-      productImg:'https://bluorng.com/cdn/shop/files/IMG_7524.jpg?v=1718954983&width=600',
+      productImg:'https://thehouseofrare.com/cdn/shop/files/MIRTILOMAROONCCC_5.jpg?v=1720701895',
       productName:'Jacket for the poor',
       productSegment:'Signature',
       productPrice:'$3000'
     },
     {
       productId:'3',
-      productImg:'https://bluorng.com/cdn/shop/files/IMG_7489.jpg?v=1718953999&width=600',
+      productImg:'https://thehouseofrare.com/cdn/shop/files/mirtilo-mens-shirt-navy4_06bb3c34-e72d-42bb-afbc-b3eacef8e816.webp?v=1726744299',
       productName:'Jacket for the poor',
       productSegment:'Signature',
       productPrice:'$3000'
@@ -70,6 +71,15 @@ export class SignatureLayoutComponent implements OnInit {
    
   ]
   ngOnInit(): void {
+    this.shopifyService.getProducts().subscribe((response) => {
+      const prod = response.data.products.edges.map((edge: any) => edge.node);
+      console.log(prod)
+    }, (error) => {
+      console.error('Error fetching products:', error);
+    });
+    this.shopifyService.getProductsByCollection('signature').subscribe((res)=>console.log(res.data.collectionByHandle.products.edges.map((edge: any) => edge.node)))
+    this.shopifyService.getProductByHandle('canvas-lunch-bag').subscribe(res => console.log(res))
+    this.shopifyService.getAllProducts().subscribe(res => console.log(res))
   }
 
   onProductClick(prodId: string): void {
