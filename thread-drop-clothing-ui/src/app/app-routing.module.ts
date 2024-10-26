@@ -6,6 +6,7 @@ import { SignatureLayoutComponent } from './layouts/signature-layout/signature-l
 // import { EliteLayoutComponent } from './layouts/elite-layout/elite-layout.component';
 import { LuxuryLayoutComponent } from './layouts/luxury-layout/luxury-layout.component';
 import { ProductComponent } from './features/product/product.component';
+import { UserComponent } from './features/user/user.component';
 
 const routes: Routes = [
   { path: '', component:MainLayoutComponent},
@@ -14,7 +15,7 @@ const routes: Routes = [
   { path: 'signature/:id', component:ProductComponent }, 
   { path: 'luxury/:id', component:ProductComponent }, 
   { path: 'cart', loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule) }, 
-  { path: 'user', loadChildren: () => import('./features/user/user.module').then(m => m.UserModule) }];
+  { path: 'account', component: UserComponent }, ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

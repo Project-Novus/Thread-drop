@@ -1,0 +1,38 @@
+<section>
+    <div *ngIf="loginError && !loading" class="">
+        Username or Password is incorrect
+    </div>
+    <div *ngIf="!loading">
+    <h1 class="px-4">
+        Please Login to your wardrobe
+    </h1>
+    <form class="flex flex-col gap-4 px-4 py-6 " [formGroup]="contactForm">
+                        
+              
+        <input [style.opacity]="formSubmitted ? 0 : 1"  placeholder="Email Address" class="focus-within:outline-none border-[#aaa] border-[0.5px]  p-3" formControlName="email" type="email" required="true" name="email" type="text">
+        
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+        <div *ngIf="email?.errors?.['required']" class="text-red-600">Email is required</div>
+        <div *ngIf="email?.errors?.['email']" class="text-red-600">Invalid Email format</div>
+        </div>
+       
+        
+        <input [style.opacity]="formSubmitted ? 0 : 1" type="password" placeholder="Password" formControlName="password" class="focus-within:outline-none border-[#aaa] border-[0.5px]  p-3" required="true" name="password" type="text">
+        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+            <div *ngIf="password?.errors?.['required']" class="text-red-600">Password is required</div>
+        </div>
+    </form>
+    <div class="px-4">
+        <button class="px-6 mb-6 py-2 border border-black hover:bg-black hover:text-white"
+                (click)="login()">
+            Login
+        </button>
+    </div>
+    <p class="px-4">
+        Don't have an account yet ?. <span class="text-cyan-500 cursor-pointer hover:underline">Signup Here</span>
+    </p>
+    </div>
+    <div *ngIf="loading">
+        Loading ....
+    </div>
+</section>

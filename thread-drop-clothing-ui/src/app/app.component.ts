@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { ShopifyService } from './core/services/shopify.service';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,10 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'THREAD DROP';
   isSplashVisible = true;
-  constructor(private router:Router){}
+  constructor(private router:Router, private shopifyService:ShopifyService){}
   ngOnInit(): void {
+    // this.createCustomer()
+    // this.loginCustomer()
     this.showSplashScreen();
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
@@ -37,5 +40,30 @@ export class AppComponent implements OnInit {
     } else {
       this.isSplashVisible = false;
     }
+  }
+
+  createCustomer(){
+    const input = {
+      firstName: "Faizan",
+      lastName: "Shariff",
+      email: "mrfaizanshariff@gmail.com",
+      password: "PLAYstation3"
+    };
+    this.shopifyService.createCustomer(input).subscribe((response:any) => {
+      console.log(response,"Customer created");
+      
+    })
+  }
+  loginCustomer(){
+    this.shopifyService.customerLogin('mrfaizanshariff@gmail.com','PLAYstation3')
+    .subscribe((response:any) =>{console.log(response,"Customer authenticated");
+    this.shopifyService
+    .getCustomerData(response
+                    .data
+                    .customerAccessTokenCreate
+                    .customerAccessToken
+                    .accessToken)
+                    .subscribe((response:any) =>{console.log(response,"customer data")})
+    })
   }
 }
