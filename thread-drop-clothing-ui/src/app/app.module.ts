@@ -19,6 +19,10 @@ import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { HttpLink } from 'apollo-angular/http';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { InMemoryCache } from '@apollo/client/core';
+import { UserComponent } from './features/user/user.component';
+import { LoginComponentComponent } from './shared/components/login-component/login-component.component';
+import { SignupComponent } from './shared/components/signup/signup.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +32,10 @@ import { InMemoryCache } from '@apollo/client/core';
     FooterComponent,
     LuxuryLayoutComponent,
     FiltersectionComponent,
-    ProductComponent
+    ProductComponent,
+    UserComponent,
+    LoginComponentComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +43,9 @@ import { InMemoryCache } from '@apollo/client/core';
     CoreModule,
     SharedModule,
     HttpClientModule,
-    ApolloModule
+    ApolloModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ {
     provide: APOLLO_OPTIONS,

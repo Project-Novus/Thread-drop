@@ -1,1 +1,11 @@
-<p>user works!</p>
+<main class="flex flex-col gap-20 min-h-[100vh] hero-section">
+    <app-navbar [option]="option"></app-navbar>
+    <section *ngIf="!isLoggedIn" class="m-auto">
+        <app-login-component (loginEvent)="loginEvent($event)"></app-login-component>
+    </section>
+    <section *ngIf="isLoggedIn">
+        <h1>
+            Welcome {{customerData?.firstName}}
+        </h1>
+    </section>
+</main>
