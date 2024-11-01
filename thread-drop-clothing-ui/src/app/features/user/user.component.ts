@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ShopifyService } from 'src/app/core/services/shopify.service';
 
 @Component({
@@ -11,7 +12,9 @@ export class UserComponent implements OnInit {
   isLoggedIn:boolean = false;
   customerAccessToken:any
   customerData:any;
-  constructor(private shopifyService:ShopifyService) { }
+  constructor(private shopifyService:ShopifyService,
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
     this.customerAccessToken = JSON.parse(localStorage.getItem('customerAccessToken') as string);
@@ -32,5 +35,11 @@ export class UserComponent implements OnInit {
       error:(err)=>{console.log(err);
       }
     })
+  }
+
+  logout(){
+    console.log("Log out")
+    localStorage.removeItem("customerAccessToken");
+    this.router.navigate(['']);
   }
 }

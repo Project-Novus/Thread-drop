@@ -3,13 +3,14 @@
         Username or Password is incorrect
     </div>
     <div *ngIf="!loading">
+       
     <h1 class="px-4">
         Please Login to your wardrobe
     </h1>
     <form class="flex flex-col gap-4 px-4 py-6 " [formGroup]="contactForm">
                         
               
-        <input [style.opacity]="formSubmitted ? 0 : 1"  placeholder="Email Address" class="focus-within:outline-none border-[#aaa] border-[0.5px]  p-3" formControlName="email" type="email" required="true" name="email" type="text">
+        <input [style.opacity]="formSubmitted ? 0 : 1"  placeholder="Email Address" class="focus-within:outline-none border-[#aaa] border-[0.5px]  p-3" formControlName="email" type="email" required="true" name="email" >
         
         <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
         <div *ngIf="email?.errors?.['required']" class="text-red-600">Email is required</div>
@@ -17,9 +18,22 @@
         </div>
        
         
-        <input [style.opacity]="formSubmitted ? 0 : 1" type="password" placeholder="Password" formControlName="password" class="focus-within:outline-none border-[#aaa] border-[0.5px]  p-3" required="true" name="password" type="text">
-        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-            <div *ngIf="password?.errors?.['required']" class="text-red-600">Password is required</div>
+        <div class="relative">
+            <div>
+                <input id="passwordInput" type="password"  placeholder="Password" formControlName="password" class="focus-within:outline-none border-[#aaa] border-[0.5px] w-full  p-3" required="true" name="password">
+                <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                    <div *ngIf="password?.errors?.['required']" class="text-red-600">Password is required</div>
+                </div>
+                
+            </div>
+            <div class="absolute right-3 top-4 cursor-pointer">
+                <span (click)="handleShowPassword()" class="material-icons" *ngIf="!showPassword">
+                    visibility
+                </span>
+                <span (click)="handleShowPassword()" class="material-icons" *ngIf="showPassword">
+                    visibility_off
+                </span>
+            </div>
         </div>
     </form>
     <div class="px-4">
@@ -29,7 +43,8 @@
         </button>
     </div>
     <p class="px-4">
-        Don't have an account yet ?. <span class="text-cyan-500 cursor-pointer hover:underline">Signup Here</span>
+        Don't have an account yet ?. <span class="text-cyan-500 cursor-pointer hover:underline"
+        routerLink="/signup">Signup Here</span>
     </p>
     </div>
     <div *ngIf="loading">
