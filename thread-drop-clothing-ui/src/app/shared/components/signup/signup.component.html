@@ -1,1 +1,83 @@
-<p>signup works!</p>
+
+<section  class="flex flex-col gap-20 min-h-[100vh] justify-center hero-section">
+    <app-navbar [option]="'account'"></app-navbar>
+    <section class="tablet:m-[15%]">
+        <div>
+            <div *ngIf="!loading">
+                <h1 *ngIf="signUpError" class="px-4 text-xl uppercase text-red-500">
+                    {{errorMessage}}
+                 </h1>
+                <h1 class="px-4">
+                    Please fill all the below fields
+                </h1>
+                <form class="flex flex-col gap-4 px-4 py-6 " [formGroup]="contactForm">
+                                    
+                          
+                    <input [style.opacity]="formSubmitted ? 0 : 1"  placeholder="First Name" class="focus-within:outline-none border-[#aaa] border-[0.5px]  p-3" formControlName="firstName" type="text" required="true" name="firstName" >
+                    <input [style.opacity]="formSubmitted ? 0 : 1"  placeholder="Last Name" class="focus-within:outline-none border-[#aaa] border-[0.5px]  p-3" formControlName="lastName" type="text" required="true" name="lastName" >
+
+                    <div [style.opacity]="formSubmitted ? 0 : 1" class="border-[#aaa] border-[0.5px]  ">
+                        <select  formControlName="countryCode" class="focus-within:outline-none w-[22%] tablet:w-[10%]">
+                            <option value=""  selected>IND +91</option>
+                            <option *ngFor="let country of countryCodes" [value]="country.code">
+                              {{ country.country }} +{{ country.code }}
+                            </option>
+                          </select>
+                      
+                          <!-- Input field for phone number -->
+                          <input  required="true" type="number" (focusout)="focusOutPhone()" formControlName="phone" class="focus-within:outline-none p-3 w-[65%]" placeholder="Enter your mobile number" />
+                        </div>
+                        <div *ngIf="contactForm.get('phone')?.invalid && (contactForm.get('phone')?.dirty || contactForm.get('phone')?.touched)">
+                          <div *ngIf="contactForm.get('phone')?.errors?.['required']" class="text-red-600">Phone Number is required</div>
+                          <div *ngIf="contactForm.get('phone')?.errors?.['phoneLength']" class="text-red-600">Enter a valid phone nuumber</div>
+                        </div>
+                        
+                        <div *ngIf="contactForm.get('countryCode')?.invalid && (contactForm.get('countryCode')?.dirty || contactForm.get('countryCode')?.touched)">
+                          <div *ngIf="contactForm.get('countryCode')?.errors?.['required']" class="text-red-600">Country Code is required</div>
+                        </div>
+                    
+                    
+                    <input [style.opacity]="formSubmitted ? 0 : 1"  placeholder="Email Address" class="focus-within:outline-none border-[#aaa] border-[0.5px]  p-3" formControlName="email" type="email" required="true" name="email" >
+                    
+                    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                    <div *ngIf="email?.errors?.['required']" class="text-red-600">Email is required</div>
+                    <div *ngIf="email?.errors?.['email']" class="text-red-600">Invalid Email format</div>
+                    </div>
+                   
+                    <div class="relative">
+                        <div>
+                            <input (focusout)="focusoutPassword()"  [style.opacity]="formSubmitted ? 0 : 1" id="passwordInput" type="password"  placeholder="Password" formControlName="password" class="focus-within:outline-none border-[#aaa] border-[0.5px] w-full  p-3" required="true" name="password">
+                            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                                <div *ngIf="password?.errors?.['required']" class="text-red-600">Password is required</div>
+                                <div *ngIf="password?.errors?.['tooShortPassword']" class="text-red-600">The Password should contain atleast 5 characters</div>
+                            </div>
+                            
+                        </div>
+                        <div class="absolute right-3 top-4 cursor-pointer">
+                            <span (click)="handleShowPassword()" class="material-icons" *ngIf="!showPassword">
+                                visibility
+                            </span>
+                            <span (click)="handleShowPassword()" class="material-icons" *ngIf="showPassword">
+                                visibility_off
+                            </span>
+                        </div>
+                    </div>
+                    
+                </form>
+                <div class="px-4">
+                    <button class="px-6 mb-6 py-2 border border-black hover:bg-black hover:text-white"
+                            (click)="signup()">
+                        Signup
+                    </button>
+                </div>
+                <p class="px-4">
+                    Already have an account? <span class="text-cyan-500 cursor-pointer hover:underline"
+                    routerLink="/account">Login</span>
+                </p>
+            </div>
+            <div *ngIf="loading">
+                Loading ....
+            </div>
+        </div>
+    </section>
+</section>

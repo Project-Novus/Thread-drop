@@ -3,9 +3,13 @@
     <section *ngIf="!isLoggedIn" class="m-auto">
         <app-login-component (loginEvent)="loginEvent($event)"></app-login-component>
     </section>
-    <section *ngIf="isLoggedIn">
+    <section *ngIf="isLoggedIn" class="p-4">
         <h1>
             Welcome {{customerData?.firstName}}
         </h1>
+        <button class="px-6 mb-6 py-2 border border-black hover:bg-black hover:text-white"
+        (click)="logout()">
+            Logout
+        </button>
     </section>
 </main>
