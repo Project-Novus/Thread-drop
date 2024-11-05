@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/core/models/productModel';
 import { ShopifyService } from 'src/app/core/services/shopify.service';
@@ -12,14 +12,19 @@ import { gsap } from 'gsap';
   templateUrl: './signature-layout.component.html',
   styleUrls: ['./signature-layout.component.scss']
 })
-export class SignatureLayoutComponent implements OnInit {
+export class SignatureLayoutComponent implements OnInit{
   scroll: boolean = false;
   option:string='signature';
   matchMedia:any;
   constructor(private router: Router,private shopifyService:ShopifyService) {
     gsap.registerPlugin(ScrollTrigger);  
     this.matchMedia=gsap.matchMedia();
-
+    this.matchMedia.add("(min-width: 600px)",()=>{
+      this.scrollNavbarChanges("4% 4%","4% 5%")
+    })
+    this.matchMedia.add("(max-width: 599px)",()=>{
+      this.scrollNavbarChanges("1% 1%","1% 4%")
+    })
    }
   productData:Product[]=[
     {
@@ -81,12 +86,7 @@ export class SignatureLayoutComponent implements OnInit {
    
   ]
   ngOnInit(): void {
-    this.matchMedia.add("(min-width: 600px)",()=>{
-      this.scrollNavbarChanges("4% 4%","4% 5%")
-    })
-    this.matchMedia.add("(max-width: 599px)",()=>{
-      this.scrollNavbarChanges("1% 1%","1% 4%")
-    })
+   
 
     
 
