@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filtersection.component.scss']
 })
 export class FiltersectionComponent implements OnInit {
-
+  openFilter:boolean = false;
   constructor() { }
 
   ngOnInit(): void {

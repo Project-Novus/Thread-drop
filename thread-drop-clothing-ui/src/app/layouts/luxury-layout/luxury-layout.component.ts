@@ -76,12 +76,12 @@ export class LuxuryLayoutComponent implements OnInit {
     gsap.registerPlugin(ScrollTrigger);  
     this.matchMedia=gsap.matchMedia();
 
-    this.matchMedia.add("(min-width: 600px)",()=>{
-      this.scrollNavbarChanges("4% 4%","4% 5%")
-    })
-    this.matchMedia.add("(max-width: 599px)",()=>{
-      this.scrollNavbarChanges("1% 1%","1% 4%")
-    })
+    // this.matchMedia.add("(min-width: 600px)",()=>{
+    //   this.scrollNavbarChanges("4% 4%","4% 5%")
+    // })
+    // this.matchMedia.add("(max-width: 599px)",()=>{
+    //   this.scrollNavbarChanges("1% 1%","1% 4%")
+    // })
    }
 
   ngOnInit(): void {

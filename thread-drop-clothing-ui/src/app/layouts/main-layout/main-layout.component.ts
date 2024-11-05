@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { gsap } from 'gsap';
 import { TextPlugin,ScrollTrigger } from 'gsap/all';
 @Component({
@@ -6,7 +6,7 @@ import { TextPlugin,ScrollTrigger } from 'gsap/all';
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss']
 })
-export class MainLayoutComponent implements OnInit,AfterViewInit  {
+export class MainLayoutComponent implements OnInit,AfterViewInit,OnDestroy  {
   scroll:boolean = false;
   matchMedia:any;
   @ViewChild('section1',{read:ElementRef}) section1!: ElementRef<HTMLElement>;
@@ -16,19 +16,6 @@ export class MainLayoutComponent implements OnInit,AfterViewInit  {
     this.matchMedia=gsap.matchMedia();
   }
   ngAfterViewInit(): void {
-    // gsap.fromTo('#bg',{
-    //   backgroundPosition: () => `50% ${-window.innerHeight * this.getRatio(this.section1.nativeElement)}px` 
-    // }, {
-    //   backgroundPosition: () => `50% ${window.innerHeight * (1 - this.getRatio(this.section1.nativeElement))}px`,
-    //   ease: "none",
-    //   scrollTrigger: {
-    //     trigger: this.section1.nativeElement,
-    //     start: () => "top bottom",
-    //     end: "bottom top",
-    //     scrub: true,
-    //     invalidateOnRefresh: true // to make it responsive
-    //   }
-    // })
   }
   getRatio = (el:any) => window.innerHeight / (window.innerHeight + el.offsetHeight);
   ngOnInit(): void {
@@ -87,5 +74,8 @@ export class MainLayoutComponent implements OnInit,AfterViewInit  {
         opacity:0.5
       })   
   } 
-
+  ngOnDestroy(): void {
+  //  gsap.sc
+    
+  }
 }

@@ -1,6 +1,9 @@
 
-<div class="flex justify-end mr-[2vw]">
-    <button class="no-outline-button text-black text-md ">
+<div class="flex justify-end flex-col items-end">
+    <button class="no-outline-button block mr-[2vw] text-black text-md " (click)="openFilter = !openFilter">
         FILTER +
     </button>
+    <div *ngIf="openFilter" class="h-[200px] w-full border">
+
+    </div>
 </div>
