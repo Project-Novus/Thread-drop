@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/core/models/productModel';
-
+import { TextPlugin,ScrollTrigger } from 'gsap/all';
+import { gsap } from 'gsap';
 @Component({
   selector: 'app-luxury-layout',
   templateUrl: './luxury-layout.component.html',
@@ -9,6 +10,9 @@ import { Product } from 'src/app/core/models/productModel';
 })
 export class LuxuryLayoutComponent implements OnInit {
   option:string="luxury"
+  scroll: boolean = false;
+  matchMedia:any;
+
   productData:Product[]=[
     {
       productId:'1',
@@ -68,11 +72,46 @@ export class LuxuryLayoutComponent implements OnInit {
     },
    
   ]
-  constructor(private router:Router) { }
+  constructor(private router:Router) {
+    gsap.registerPlugin(ScrollTrigger);  
+    this.matchMedia=gsap.matchMedia();
+   }
 
   ngOnInit(): void {
+    this.matchMedia.add("(min-width: 600px)",()=>{
+      this.scrollNavbarChanges("4% 4%","4% 5%")
+    })
+    this.matchMedia.add("(max-width: 599px)",()=>{
+      this.scrollNavbarChanges("1% 1%","1% 4%")
+    })
   }
   onProductClick(prodId: string): void {
     this.router.navigate([`luxury/${prodId}`], { queryParams: { from: 'luxury' } })
+  }
+  scrollNavbarChanges(startingPercentageString: string,endPercentageString: string) {
+    
+    gsap.from('.hero-section',{
+      scrollTrigger:{
+        trigger:".hero-section",
+        start:`${startingPercentageString}`,
+        end:`${endPercentageString}`,
+        
+        // markers:true,
+        onEnterBack:()=>{
+          
+          this.scroll = false;
+          console.log("scrolled Back",this.scroll);
+          
+        },
+        // markers:true,
+        onUpdate:()=>{
+          this.scroll=true;
+          console.log("scrolled",this.scroll);
+          
+        }
+      }
+    })
+
+    return ()=>{}
   }
 }

@@ -7,7 +7,7 @@
     <h1 class="px-4">
         Please Login to your wardrobe
     </h1>
-    <form class="flex flex-col gap-4 px-4 py-6 " [formGroup]="contactForm">
+    <form class="flex flex-col gap-4 px-4 py-6 " (keyup.enter)="login()" [formGroup]="contactForm">
                         
               
         <input [style.opacity]="formSubmitted ? 0 : 1"  placeholder="Email Address" class="focus-within:outline-none border-[#aaa] border-[0.5px]  p-3" formControlName="email" type="email" required="true" name="email" >

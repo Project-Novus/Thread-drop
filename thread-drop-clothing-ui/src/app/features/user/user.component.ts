@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CustomerStateService } from 'src/app/core/services/customer-state.service';
 import { ShopifyService } from 'src/app/core/services/shopify.service';
 
 @Component({
@@ -13,26 +14,25 @@ export class UserComponent implements OnInit {
   customerAccessToken:any
   customerData:any;
   constructor(private shopifyService:ShopifyService,
+    private customerStateService:CustomerStateService,
     private router:Router
   ) { }
 
   ngOnInit(): void {
     this.customerAccessToken = JSON.parse(localStorage.getItem('customerAccessToken') as string);
-   this.isLoggedIn = this.customerAccessToken ? true : false;
+    this.isLoggedIn = this.customerAccessToken ? true : false;
     if(this.isLoggedIn)
-    this.getCustomeData(this.customerAccessToken?.accessToken)  
+    this.getCustomerData()  
   }
   loginEvent(event:any){
     this.isLoggedIn = event.isLoggedIn;
-    this.getCustomeData(event?.customerAccessToken)
+    this.getCustomerData()
   }
-  getCustomeData(customerAccessToken:string){
-    this.shopifyService.getCustomerData(customerAccessToken).subscribe({
-      next:(res)=>{
-        console.log(res,"Customer Data");
-        this.customerData = res.data.customer
-      },
-      error:(err)=>{console.log(err);
+  getCustomerData(){
+    this.customerStateService.loadCustomerProfile()
+    this.customerStateService.customer$.subscribe({
+      next:(res:any)=>{
+        this.customerData = res?.data?.customer
       }
     })
   }

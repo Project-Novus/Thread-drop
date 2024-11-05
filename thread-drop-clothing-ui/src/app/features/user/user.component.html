@@ -4,12 +4,17 @@
         <app-login-component (loginEvent)="loginEvent($event)"></app-login-component>
     </section>
     <section *ngIf="isLoggedIn" class="p-4">
+       <div class="flex justify-between">
         <h1>
-            Welcome {{customerData?.firstName}}
+            Welcome to your Wardrobe <span class="text-xl font-bold">{{customerData?.firstName}}</span>
         </h1>
         <button class="px-6 mb-6 py-2 border border-black hover:bg-black hover:text-white"
         (click)="logout()">
             Logout
         </button>
+       </div>
+       <div>
+        
+       </div>
     </section>
 </main>

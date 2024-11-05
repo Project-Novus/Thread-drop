@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/core/models/productModel';
 import { ShopifyService } from 'src/app/core/services/shopify.service';
+import { TextPlugin,ScrollTrigger } from 'gsap/all';
+import { gsap } from 'gsap';
+
+
 
 @Component({
   selector: 'app-signature-layout',
@@ -9,8 +13,14 @@ import { ShopifyService } from 'src/app/core/services/shopify.service';
   styleUrls: ['./signature-layout.component.scss']
 })
 export class SignatureLayoutComponent implements OnInit {
+  scroll: boolean = false;
   option:string='signature';
-  constructor(private router: Router,private shopifyService:ShopifyService) { }
+  matchMedia:any;
+  constructor(private router: Router,private shopifyService:ShopifyService) {
+    gsap.registerPlugin(ScrollTrigger);  
+    this.matchMedia=gsap.matchMedia();
+
+   }
   productData:Product[]=[
     {
       productId:'1',
@@ -71,6 +81,15 @@ export class SignatureLayoutComponent implements OnInit {
    
   ]
   ngOnInit(): void {
+    this.matchMedia.add("(min-width: 600px)",()=>{
+      this.scrollNavbarChanges("4% 4%","4% 5%")
+    })
+    this.matchMedia.add("(max-width: 599px)",()=>{
+      this.scrollNavbarChanges("1% 1%","1% 4%")
+    })
+
+    
+
     this.shopifyService.getProducts().subscribe((response) => {
       const prod = response.data.products.edges.map((edge: any) => edge.node);
       console.log(prod)
@@ -82,6 +101,32 @@ export class SignatureLayoutComponent implements OnInit {
     this.shopifyService.getAllProducts().subscribe(res => console.log(res))
   }
 
+  scrollNavbarChanges(startingPercentageString: string,endPercentageString: string) {
+    
+    gsap.from('.hero-section',{
+      scrollTrigger:{
+        trigger:".hero-section",
+        start:`${startingPercentageString}`,
+        end:`${endPercentageString}`,
+        
+        // markers:true,
+        onEnterBack:()=>{
+          
+          this.scroll = false;
+          console.log("scrolled Back",this.scroll);
+          
+        },
+        // markers:true,
+        onUpdate:()=>{
+          this.scroll=true;
+          console.log("scrolled",this.scroll);
+          
+        }
+      }
+    })
+
+    return ()=>{}
+  }
   onProductClick(prodId: string): void {
     this.router.navigate([`signature/${prodId}`], { queryParams: { from: 'signature' } })
   }
