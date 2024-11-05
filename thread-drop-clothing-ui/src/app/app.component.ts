@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // this.createCustomer()
     // this.loginCustomer()
+    // this.recoverPassword()
     this.showSplashScreen();
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
@@ -64,6 +65,13 @@ export class AppComponent implements OnInit {
                     .customerAccessToken
                     .accessToken)
                     .subscribe((response:any) =>{console.log(response,"customer data")})
+    })
+  }
+  recoverPassword(){
+    this.shopifyService.recoverCustomerPassword('faizantherooster@gmail.com').subscribe((res)=>{
+
+      console.log(res);
+      
     })
   }
 }

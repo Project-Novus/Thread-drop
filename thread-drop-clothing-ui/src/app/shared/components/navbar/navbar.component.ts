@@ -19,9 +19,10 @@ export class NavbarComponent implements OnInit,OnChanges {
     if(this.scroll){
       this.addBlackRemoveWhite()
       gsap.to(".nav",{
-        color:"black",
-        background:"white",
-        duration:0.3,
+        color:"white",
+        background:"#1A4BE4",
+        duration:0.2,
+        
         // fontWeight:"bold"
       })
     }else{
@@ -29,7 +30,8 @@ export class NavbarComponent implements OnInit,OnChanges {
       gsap.to(".nav",{
         color:"white",
         background:"transparent",
-        duration:0.3,
+        duration:0.2,
+        
       })
     }
   }
