@@ -109,7 +109,7 @@ export class SignatureLayoutComponent implements OnInit{
         start:`${startingPercentageString}`,
         end:`${endPercentageString}`,
         
-        // markers:true,
+        markers:true,
         onEnterBack:()=>{
           
           this.scroll = false;
