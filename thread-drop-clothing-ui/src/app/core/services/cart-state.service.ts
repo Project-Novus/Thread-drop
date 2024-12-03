@@ -11,8 +11,9 @@ export class CartStateService {
 
   constructor(private shopifyService: ShopifyService) {}
 
-  createCart(variantId: string, quantity: number): void {
-    this.shopifyService.createCheckout([{ variantId, quantity }])
+  createCart(variantId: string, quantity: number,buyerIdentity:any): void {
+    // this.shopifyService.createCheckout([{ variantId, quantity }])
+    this.shopifyService.createCart([{ variantId, quantity }],buyerIdentity)
       .pipe(tap(cart => this.cartSubject.next(cart)))
       .subscribe();
   }

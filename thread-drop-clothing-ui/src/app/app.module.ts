@@ -23,6 +23,13 @@ import { UserComponent } from './features/user/user.component';
 import { LoginComponentComponent } from './shared/components/login-component/login-component.component';
 import { SignupComponent } from './shared/components/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductListItemComponent } from './shared/components/product-list-item/product-list-item.component';
+import { SizeSelectorComponent } from './shared/components/size-selector/size-selector.component';
+import { ProductPageComponent } from './shared/components/product-page/product-page.component';
+import { ProductIndividualMobileComponent } from './shared/components/product-individual-mobile/product-individual-mobile.component';
+import { ProductIndividualDesktopComponent } from './shared/components/product-individual-desktop/product-individual-desktop.component';
+import { FilterChipsComponent } from './shared/components/filtersection/filter-chips/filter-chips.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +42,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProductComponent,
     UserComponent,
     LoginComponentComponent,
-    SignupComponent
+    SignupComponent,
+    ProductListItemComponent,
+    SizeSelectorComponent,
+    ProductPageComponent,
+    ProductIndividualMobileComponent,
+    ProductIndividualDesktopComponent,
+    FilterChipsComponent
   ],
   imports: [
     BrowserModule,
@@ -45,12 +58,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ApolloModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [ {
     provide: APOLLO_OPTIONS,
     useFactory: (httpLink: HttpLink) => {
-      const uri = 'https://2bef72-db.myshopify.com/api/2023-07/graphql.json';
+      const uri = 'https://2bef72-db.myshopify.com/api/2024-10/graphql.json';
       const headers = new HttpHeaders().set('X-Shopify-Storefront-Access-Token', '10e37673bbc15bcdc69d8c8e1686f214');
 
       return {

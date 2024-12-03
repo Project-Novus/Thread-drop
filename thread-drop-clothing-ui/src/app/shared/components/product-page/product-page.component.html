@@ -1,0 +1,15 @@
+<section class="flex flex-col items-center">
+    <div class="sticky top-[16vw]  xsm:top-[13.5vw] tablet-sm:top-[7.5vw] tablet:top-[5.5vw] laptop-sm:top-[3.5vw]  z-100 w-full py-6 tablet-sm:py-8 tablet:py-10 bg-white border-b">
+       <app-filtersection></app-filtersection>
+    </div>
+    <div class="overflow-hidden w-full gap-[2vw]  p-[6vw] tablet-sm:p-[4vw] laptop-sm:p-[2vw] flex flex-col items-center  tablet-sm:grid tablet-sm:grid-cols-2 laptop-sm:grid-cols-3">
+        <ng-container *ngFor="let product of productStateService.products$ | async">
+            <app-product-list-item [product]="product" 
+            [productName]="product?.node?.title" 
+            [productPrice]="product?.node?.priceRange?.minVariantPrice?.amount"
+            [productImage]="product?.node?.images?.edges[0]?.node?.originalSrc"
+            (productClick)="onProductClick($event)"></app-product-list-item>
+        </ng-container>        
+        
+    </div>
+</section>

@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
+import { Address } from '../models/address.model';
 @Injectable({
   providedIn: 'root'
 })
 export class ShopifyService {
 
-  private apiUrl = 'https://2bef72-db.myshopify.com/api/2023-07/graphql.json'; // Update with your store URL
+  private apiUrl = 'https://2bef72-db.myshopify.com/api/2024-10/graphql.json'; // Update with your store URL
   private storefrontAccessToken = '10e37673bbc15bcdc69d8c8e1686f214'; // Replace with your token
 
   constructor(private http: HttpClient,private apollo: Apollo) {}
@@ -162,6 +163,12 @@ getProductByHandles(handle: string): Observable<any> {
           title
           description
           handle
+          priceRange {
+                  minVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                }
           variants(first: 5) {
             edges {
               node {
@@ -361,7 +368,40 @@ getProductByHandles(handle: string): Observable<any> {
         The response contains the updated customer details or errors if any occur.
      */
   }
-
+   createCustomerAddress(address:Address,customerAccessToken:string):Observable<any>{
+    const CUSTOMER_ADRESS_CREATE= gql`
+    mutation customerAddressCreate($address: MailingAddressInput!, $customerAccessToken: String!) {
+    customerAddressCreate(address: $address, customerAccessToken: $customerAccessToken) {
+    customerAddress {
+      id
+      address1
+      address2
+      city
+      company
+      country
+      countryCodeV2
+      firstName
+      lastName
+      name
+      phone
+      zip
+    }
+    
+    userErrors {
+      field
+      message
+    }
+  }
+}
+    `
+    return this.apollo.mutate({
+      mutation:CUSTOMER_ADRESS_CREATE,
+      variables:{
+        address:address,
+        customerAccessToken:customerAccessToken
+      }
+    })
+   }
   recoverCustomerPassword(email: string): Observable<any> {
     const CUSTOMER_RECOVER = gql`
       mutation customerRecover($email: String!) {
@@ -488,6 +528,76 @@ lineItems: The products added to the cart, specified by variantId and quantity.
 The response includes the checkout id, webUrl (to complete the purchase), 
 and the line items added to the checkout.
   */
+}
+
+createCart(lineItems: any[], buyerIdentity: any): Observable<any> {
+  const CART_CREATE = gql`
+    mutation cartCreate($input: CartInput) {
+      cartCreate(input: $input) {
+        cart {
+          id
+          checkoutUrl
+          lines(first: 10) {
+            edges {
+              node {
+                id
+                quantity
+                merchandise {
+                  ... on ProductVariant {
+                    id
+                    title
+                    price {
+                      amount
+                      currencyCode
+                    }
+                  }
+                }
+              }
+            }
+          }
+          attributes {
+            key
+            value
+          }
+          cost {
+            totalAmount {
+              amount
+              currencyCode
+            }
+          }
+          buyerIdentity {
+            countryCode,
+             email
+            phone
+          }
+          
+            
+        }
+        userErrors {
+          field
+          message
+        }
+        warnings {
+          message
+        }
+      }
+    }
+  `;
+
+  return this.apollo.mutate({
+    mutation: CART_CREATE,
+    variables: {
+      input: {
+        lines: lineItems.map(item => ({
+          merchandiseId: item.variantId,
+          quantity: item.quantity
+        })),
+        buyerIdentity: buyerIdentity || null,
+        attributes: [],
+        
+      }
+    }
+  });
 }
 
 addLineItemsToCheckout(checkoutId: string, lineItems: any[]): Observable<any> {

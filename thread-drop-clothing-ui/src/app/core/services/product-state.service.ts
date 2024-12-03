@@ -15,15 +15,22 @@ export class ProductStateService {
 
   constructor(private shopifyService: ShopifyService) {}
 
+  loadAllProducts():void{
+    this.shopifyService.getAllProducts().subscribe(res=>console.log(res))  
+  }
   loadProducts(collectionHandle: string): void {
     this.shopifyService.getProductsByCollection(collectionHandle)
-      .pipe(tap(products => this.productsSubject.next(products)))
+      .pipe(tap(products => this.productsSubject.next(products?.data?.collectionByHandle?.products?.edges)))
       .subscribe();
   }
 
   loadProductById(productId: string): void {
     this.shopifyService.getProductByHandle(productId)
-      .pipe(tap(product => this.selectedProductSubject.next(product)))
+      .pipe(tap(product => this.selectedProductSubject.next(product?.data?.productByHandle)))
       .subscribe();
+  }
+
+  clearSelectedProduct():void{
+      this.selectedProductSubject.next(null);
   }
 }
