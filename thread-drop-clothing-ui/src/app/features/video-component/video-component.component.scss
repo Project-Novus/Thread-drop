@@ -26,3 +26,7 @@
       pointer-events: none; /* Disable any interaction with the video */
     }
   }
+
+  video::-webkit-media-controls {
+    display: none !important;
+  }
