@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { ShopifyService } from './shopify.service';
+import { Address } from '../models/address.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,14 @@ export class CustomerStateService {
     this.ordersSubject.next([]);
   }
 
+  createCustomerAddress(address: Address,customerAccessToken: string){
+    this.shopifyService.createCustomerAddress(address,customerAccessToken)
+     .pipe(
+      tap(customerAddressCreationResponse=>{
+       console.log(customerAddressCreationResponse);
+      })
+     ).subscribe()
+  }
   loadCustomerProfile(): void {
     const accessTokenObj = JSON.parse(localStorage.getItem('customerAccessToken') as string);;
     if (accessTokenObj) {

@@ -7,12 +7,19 @@
     font-family: helvetica;
     src: url(assets/helvetica.otf) format("opentype");
   }
+@font-face {
+    font-family: italian;
+    src: url(assets/ItalianPlateNo2Expanded-Black.ttf) format("truetype");
+  }
 *,body{
     margin: 0;
     padding: 0;
     // font-family: var(--font-family);
     // font-family: "Syne", sans-serif;;
     font-family: "Bricolage Grotesque", sans-serif;
+}
+.logo-text{
+  font-family: italian;
 }
 .signature-layout-bg{
   background: var(--signature-background-color);
