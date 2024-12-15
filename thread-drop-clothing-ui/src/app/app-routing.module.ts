@@ -8,9 +8,11 @@ import { LuxuryLayoutComponent } from './layouts/luxury-layout/luxury-layout.com
 import { ProductComponent } from './features/product/product.component';
 import { UserComponent } from './features/user/user.component';
 import { SignupComponent } from './shared/components/signup/signup.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: '', component:MainLayoutComponent},
+  { path: '', component:AppComponent},
+  { path: 'home', component:MainLayoutComponent},
   { path: 'signature', component:SignatureLayoutComponent},
   { path: 'luxury', component:LuxuryLayoutComponent},
   { path: 'signature/:id', component:ProductComponent }, 
