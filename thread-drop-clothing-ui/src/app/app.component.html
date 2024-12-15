@@ -1,27 +1,13 @@
-<main class="h-[100vh] relative overflow-hidden bg-black">
-  <!-- <div class="splash-screen" *ngIf="isSplashVisible">
+<main >
+  <div class="splash-screen" *ngIf="isSplashVisible">
     <div class="door door-top text-white text-8xl flex items-end justify-center">
       THREAD
     </div>
     <div  class="door door-bottom text-white text-8xl flex items-start justify-center">
       DROP
     </div>
-  </div> -->
-
-  <div class=" vdo-container">
-    <video
-    #backgroundVideo
-    autoplay
-    (loadedmetadata)="onVideoLoaded($event)"
-    (ended)="showText()"
-  >
-    <source src="../assets/video/fastcars_td.MP4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>  
-</div>
-  <div class="text-5xl font-bold text-white absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] whitespace-nowrap" #textElement style="display: none;">
-    THREAD DROP
   </div>
+
   
   <router-outlet></router-outlet>
 </main>

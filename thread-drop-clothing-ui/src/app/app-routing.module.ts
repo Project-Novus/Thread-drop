@@ -9,9 +9,10 @@ import { ProductComponent } from './features/product/product.component';
 import { UserComponent } from './features/user/user.component';
 import { SignupComponent } from './shared/components/signup/signup.component';
 import { AppComponent } from './app.component';
+import { VideoComponentComponent } from './features/video-component/video-component.component';
 
 const routes: Routes = [
-  { path: '', component:AppComponent},
+  { path: '', component:VideoComponentComponent},
   { path: 'home', component:MainLayoutComponent},
   { path: 'signature', component:SignatureLayoutComponent},
   { path: 'luxury', component:LuxuryLayoutComponent},
