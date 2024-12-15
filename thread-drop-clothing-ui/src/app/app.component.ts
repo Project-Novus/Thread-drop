@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { ShopifyService } from './core/services/shopify.service';
-
+import { AppState } from 'src/app/state/app.state';
+import * as ProductActions from '../app/state/product/product.actions'
+import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,11 +12,11 @@ import { ShopifyService } from './core/services/shopify.service';
 export class AppComponent implements OnInit {
   title = 'THREAD DROP';
   isSplashVisible = true;
-  constructor(private router:Router, private shopifyService:ShopifyService){}
+  constructor(private router:Router, 
+    private shopifyService:ShopifyService,
+    private store:Store<AppState>){}
   ngOnInit(): void {
-    // this.createCustomer()
-    // this.loginCustomer()
-    // this.recoverPassword()
+    this.store.dispatch(ProductActions.loadProducts())
     this.showSplashScreen();
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
@@ -43,30 +45,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  createCustomer(){
-    const input = {
-      firstName: "Faizan",
-      lastName: "Shariff",
-      email: "mrfaizanshariff@gmail.com",
-      password: "PLAYstation3"
-    };
-    this.shopifyService.createCustomer(input).subscribe((response:any) => {
-      console.log(response,"Customer created");
-      
-    })
-  }
-  loginCustomer(){
-    this.shopifyService.customerLogin('mrfaizanshariff@gmail.com','PLAYstation3')
-    .subscribe((response:any) =>{console.log(response,"Customer authenticated");
-    this.shopifyService
-    .getCustomerData(response
-                    .data
-                    .customerAccessTokenCreate
-                    .customerAccessToken
-                    .accessToken)
-                    .subscribe((response:any) =>{console.log(response,"customer data")})
-    })
-  }
+ 
   recoverPassword(){
     this.shopifyService.recoverCustomerPassword('faizantherooster@gmail.com').subscribe((res)=>{
 

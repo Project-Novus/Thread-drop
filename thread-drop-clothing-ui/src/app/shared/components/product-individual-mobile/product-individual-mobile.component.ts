@@ -4,7 +4,11 @@ import { Product } from 'src/app/core/models/productModel';
 import { SelectedSize } from '../../models/sizeModel';
 import { ProductStateService } from 'src/app/core/services/product-state.service';
 import { CartStateService } from 'src/app/core/services/cart-state.service';
-
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { AppState } from 'src/app/state/app.state';
+import * as ProductSelector from '../../../state/product/product.selectors'
+import * as ProductAction from '../../../state/product/product.actions'
 @Component({
   selector: 'app-product-individual-mobile',
   templateUrl: './product-individual-mobile.component.html',
@@ -17,32 +21,43 @@ export class ProductIndividualMobileComponent implements OnInit  {
   tabOne:boolean = true;
   tabTwo:boolean = false;
   tabThree:boolean = false;
-  sizes:string[] = ["S","M","L","XL","XXL"];
+  sizes:string[] = ["M","L","XL","XXL"];
   isSelected:boolean = false;
   selectedData:SelectedSize = {
-    size:'S',
+    size:'M',
     isSelected:true
   };
   productData:any
   selectedProduct: Product | null | any = null;
+  productSelecSubscription:Subscription | null = null;
   constructor(private route: ActivatedRoute,
               public productStateService: ProductStateService,
-            public cartStateService: CartStateService)
+              private store:Store<AppState>
+            )
                { }
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('id') || '';
     this.sourcePage = this.route.snapshot.queryParamMap.get('from')
-    this.productStateService.clearSelectedProduct();
-    this.productStateService.loadProductById(this.productId)
-    this.productStateService.selectedProduct$
-                .subscribe(
-                  data => {
-                    this.selectedProduct = data;
-                    console.log(data);
-                    this.sizes = [...this.getTheAvailableSizes()]
-                  }
-                );
+    
+    if(!this.productSelecSubscription)
+      this.getSelectedProductDetails()
+    console.log(this.productSelecSubscription);
+    
+    
+  }
+  getSelectedProductDetails(){
+    this.productSelecSubscription = this.store.select(ProductSelector.selectProductDetails).subscribe(data=>{
+      if(data){
+        this.selectedProduct = data.productByHandle;
+      console.log("Selcted Product moi;r");
+      
+      this.sizes = [...this.getTheAvailableSizes()]
+    }else{
+        console.log("Selcted Product getting moi;r");
+        this.store.dispatch(ProductAction.loadProductDetails({productId:this.productId}))
+      }
+    })
   }
   detailSectionClick(tab:number){
     if(tab===1){
@@ -116,7 +131,7 @@ export class ProductIndividualMobileComponent implements OnInit  {
       // ]
   }
     console.log(selectedVariant);
-    this.cartStateService.createCart(selectedVariant.id, selectedVariant.quantity,buyerIdentity)
+    // this.cartStateService.createCart(selectedVariant.id, selectedVariant.quantity,buyerIdentity)
     
     
   }

@@ -32,9 +32,21 @@ export class ShopifyService {
 getProducts(): Observable<any> {
   const productsQuery = `
   {
-    products(first: 10) {
+    products(first: 100) {
       edges {
         node {
+          handle
+          collections(first:10){
+            edges{
+            node{
+              id
+              description
+              handle
+              title
+            }
+            
+            }
+          }
           id
           title
           description
@@ -120,7 +132,7 @@ getProductByHandles(handle: string): Observable<any> {
         collectionByHandle(handle: $collectionHandle) {
           id
           title
-          products(first: 10) {
+          products(first: 100) {
             edges {
               node {
                 id
@@ -204,7 +216,7 @@ getProductByHandles(handle: string): Observable<any> {
   getAllProducts(): Observable<any> {
     const GET_ALL_PRODUCTS = gql`
     {
-      products(first: 10) {
+      products(first: 100) {
         edges {
           node {
             id
