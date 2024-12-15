@@ -1,7 +1,13 @@
 
 <main class="flex flex-col gap-20 bg-slate-50 min-h-[100vh] hero-section">
     <app-navbar [option]="sourcePage"></app-navbar>
+    <!-- <ng-container *ngIf="smallScreen">
+        <app-product-individual-mobile></app-product-individual-mobile>
+        
+    </ng-container> -->
     <app-product-individual-desktop></app-product-individual-desktop>
-    <app-product-individual-mobile></app-product-individual-mobile>
+ 
+    
+    
     <app-footer></app-footer>
 </main>

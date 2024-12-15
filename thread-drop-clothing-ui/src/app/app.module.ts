@@ -30,6 +30,12 @@ import { ProductIndividualMobileComponent } from './shared/components/product-in
 import { ProductIndividualDesktopComponent } from './shared/components/product-individual-desktop/product-individual-desktop.component';
 import { FilterChipsComponent } from './shared/components/filtersection/filter-chips/filter-chips.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { AppStateModule } from './state/app-state.module'
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +66,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+   
+    StoreRouterConnectingModule.forRoot(),
+    AppStateModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [ {
     provide: APOLLO_OPTIONS,

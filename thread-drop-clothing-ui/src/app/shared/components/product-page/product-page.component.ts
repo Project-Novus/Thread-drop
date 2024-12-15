@@ -1,8 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, tap } from 'rxjs';
 import { ProductStateService } from 'src/app/core/services/product-state.service';
 import { ShopifyService } from 'src/app/core/services/shopify.service';
+import { AppState } from 'src/app/state/app.state';
+import * as ProductSelector from '../../../state/product/product.selectors' 
+import * as ProductActions from '../../../state/product/product.actions' 
 
 @Component({
   selector: 'app-product-page',
@@ -11,23 +15,31 @@ import { ShopifyService } from 'src/app/core/services/shopify.service';
 })
 export class ProductPageComponent implements OnInit {
   @Input() option:string=''
+  products$!:Observable<any>
   constructor(private router: Router,
     private shopifyService:ShopifyService,
-    public productStateService:ProductStateService) {
-  this.productStateService.products$.pipe(
-  tap((res) => {console.log(res,"Product state");
-
-  })
-)
-.subscribe()
+    public productStateService:ProductStateService,
+    private store: Store<AppState>) {
+      
+      this.store.dispatch(ProductActions.clearProductDetails());
 
 }
 
   ngOnInit(): void {
-    this.productStateService.loadProducts(this.option);
-    this.productStateService.selectedProduct$
+    
+    if(this.option === "signature"){
+
+      this.products$ = this.store.select(ProductSelector.selectSignatureProducts)
+    }else{
+      this.products$ = this.store.select(ProductSelector.selectLuxuryProducts)
+
+    }
+    
+    console.log("Product Page Component");
+    
   }
-  onProductClick(prodId: string): void {
-    this.router.navigate([`${this.option}/${prodId}`], { queryParams: { from: `${this.option}` } })
+  onProductClick(productId: string): void {
+    this.store.dispatch(ProductActions.loadProductDetails({productId}))
+    this.router.navigate([`${this.option}/${productId}`], { queryParams: { from: `${this.option}` } })
   }
 }
