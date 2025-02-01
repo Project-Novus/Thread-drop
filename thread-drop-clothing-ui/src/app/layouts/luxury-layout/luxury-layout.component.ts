@@ -13,7 +13,7 @@ export class LuxuryLayoutComponent implements OnInit {
   scroll: boolean = false;
   matchMedia:any;
 
-  productData:Product[]=[
+  productData=[
     {
       productId:'1',
       productImg:'https://bluorng.com/cdn/shop/files/Untitled_Artwork_26938.jpg?v=1721028475&width=600',

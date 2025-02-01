@@ -3,6 +3,7 @@ import * as CustomerActions from './customer.actions';
 
 export interface CustomerState {
   profile: any;
+  customerAccessToken:any
   orders: any[];
   loggedIn: boolean;
   error:any
@@ -10,6 +11,7 @@ export interface CustomerState {
 
 const initialState: CustomerState = {
   profile: null,
+  customerAccessToken:null,
   orders: [],
   loggedIn: false,
   error:null
@@ -17,9 +19,9 @@ const initialState: CustomerState = {
 
 export const customerReducer = createReducer(
   initialState,
-  on(CustomerActions.loginSuccess, (state, { customer }) => ({
+  on(CustomerActions.loginSuccess, (state, { customerAccessToken }) => ({
     ...state,
-    profile: customer,
+    customerAccessToken: customerAccessToken,
     loggedIn: true,
   })),
   on(CustomerActions.loginFailure, (state,{error}) => ({
@@ -31,5 +33,14 @@ export const customerReducer = createReducer(
   on(CustomerActions.loadOrders, (state, { orders }) => ({
     ...state,
     orders,
+  })),
+  on(CustomerActions.loadCustomerProfile, (state, { customer }) => ({
+    ...state,
+    profile: customer,
+  })),
+  on(CustomerActions.alreadyLoggedIn, (state, { customerAccessToken }) => ({
+    ...state,
+    customerAccessToken: customerAccessToken,
+    loggedIn: true,
   }))
 );

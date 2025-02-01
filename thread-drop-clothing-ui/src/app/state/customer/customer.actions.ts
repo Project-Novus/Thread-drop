@@ -1,30 +1,37 @@
 import { createAction, props } from '@ngrx/store';
 
 export const login = createAction(
-  '[Customer] Login',
+  '[User] Login',
   props<{ email: string; password: string }>()
 );
-
+export const alreadyLoggedIn = createAction(
+  '[User] Logged In',
+  props<{customerAccessToken:any}>()
+)
 export const loginSuccess = createAction(
-  '[Customer] Login Success',
+  '[User] Login Success',
+  props<{ customerAccessToken: any }>()
+);
+export const loadCustomerProfile = createAction(
+  '[User] Load Customer Profile',
   props<{ customer: any }>()
 );
 
 export const loginFailure = createAction(
-  '[Customer] Login Failure',
+  '[User] Login Failure',
   props<{ error: any }>()
 );
 
-export const loadProfile = createAction('[Customer] Load Profile',
-    props<{customerAccessToken:string}>()
+export const loadProfile = createAction('[User] Load Profile',
+    props<{customerAccessToken:any}>()
 );
 
-export const loadOrders = createAction('[Customer] Load Orders',
+export const loadOrders = createAction('[User] Load Orders',
     props<{orders:any}>()
 );
-export const loadOrdersSuccess = createAction('[Customer] Load Orders Success',
+export const loadOrdersSuccess = createAction('[User] Load Orders Success',
     props<{orders:any}>()
 );
-export const loadOrdersFailure = createAction('[Customer] Load Orders Success',
+export const loadOrdersFailure = createAction('[User] Load Orders Success',
     props<{error:any}>()
 );

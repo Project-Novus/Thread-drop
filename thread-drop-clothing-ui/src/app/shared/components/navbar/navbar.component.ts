@@ -70,14 +70,17 @@ export class NavbarComponent implements OnInit,OnChanges {
 
   showMenuAnimation(){
     gsap.fromTo('.sidenav',{
-      x:'-100%'
+      x:'-100%',
+      
     },{
-       x:'0'
-    })
-  }
-  hideMenuAnimation(){
-    gsap.to('.sidenav',{
-     x: '-100%'
+       x:'0',
+       duration:0.1
+      })
+    }
+    hideMenuAnimation(){
+      gsap.to('.sidenav',{
+        x: '-100%',
+        duration:0.1
     })
   }
 }

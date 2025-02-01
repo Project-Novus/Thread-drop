@@ -312,10 +312,39 @@ getProductByHandles(handle: string): Observable<any> {
           firstName
           lastName
           email
+          phone
+          defaultAddress{
+            address1
+            address2
+            city
+            country
+            countryCodeV2
+            province
+            provinceCode
+            zip
+          }
           orders(first: 5) {
             edges {
               node {
                 orderNumber
+                customerUrl
+                shippingAddress{
+                address1
+                address2
+                city
+                company
+                country
+                countryCodeV2
+                firstName
+                lastName
+                latitude
+                longitude
+                name
+                phone
+                province
+                zip
+                }
+                statusUrl
                 totalPriceV2 {
                   amount
                   currencyCode
@@ -548,6 +577,7 @@ createCart(lineItems: any[], buyerIdentity: any): Observable<any> {
       cartCreate(input: $input) {
         cart {
           id
+          
           checkoutUrl
           lines(first: 10) {
             edges {
@@ -567,6 +597,7 @@ createCart(lineItems: any[], buyerIdentity: any): Observable<any> {
               }
             }
           }
+          
           attributes {
             key
             value
@@ -578,8 +609,9 @@ createCart(lineItems: any[], buyerIdentity: any): Observable<any> {
             }
           }
           buyerIdentity {
-            countryCode,
-             email
+            customerAccessToken
+            countryCode
+            email
             phone
           }
           

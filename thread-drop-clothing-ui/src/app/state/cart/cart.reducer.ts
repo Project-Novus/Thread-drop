@@ -4,12 +4,14 @@ import * as CartActions from './cart.action';
 export interface CartState {
   items: any[];
   totalCost: number;
+  cartId: string;
   checkoutUrl: string | null;
 }
 
 const initialState: CartState = {
   items: [],
   totalCost: 0,
+  cartId:'',
   checkoutUrl: null,
 };
 

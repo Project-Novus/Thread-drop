@@ -5,8 +5,8 @@ import { Observable, tap } from 'rxjs';
 import { ProductStateService } from 'src/app/core/services/product-state.service';
 import { ShopifyService } from 'src/app/core/services/shopify.service';
 import { AppState } from 'src/app/state/app.state';
-import * as ProductSelector from '../../../state/product/product.selectors' 
-import * as ProductActions from '../../../state/product/product.actions' 
+import * as ProductSelector from '../../state/product/product.selectors' 
+import * as ProductActions from '../../state/product/product.actions' 
 
 @Component({
   selector: 'app-product-page',

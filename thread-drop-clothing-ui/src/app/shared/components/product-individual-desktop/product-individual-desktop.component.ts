@@ -6,6 +6,8 @@ import { SelectedSize } from '../../models/sizeModel';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import * as ProductSelector from '../../../state/product/product.selectors'
+import * as CartActions from '../../../state/cart/cart.action'
+import * as CartSelector from '../../../state/cart/cart.selectors'
 import * as ProductAction from '../../../state/product/product.actions'
 import { Observable, Subscription } from 'rxjs';
 @Component({
@@ -46,15 +48,15 @@ export class ProductIndividualDesktopComponent implements OnInit,OnDestroy {
     
     if(!this.productSelecSubscription)
       this.getSelectedProductDetails()
-    console.log(this.productSelecSubscription);
-    
     
   }
   getSelectedProductDetails(){
     this.productSelecSubscription = this.store.select(ProductSelector.selectProductDetails).subscribe(data=>{
       if(data){
-        this.selectedProduct = data.productByHandle;
-      console.log("Selcted Product");
+        console.log(data.productByHandle);
+        
+        this.selectedProduct = this.selectedProductFormatter(data.productByHandle)
+      console.log("Selcted Product",this.selectedProduct);
       
       this.sizes = [...this.getTheAvailableSizes()]
     }else{
@@ -80,30 +82,74 @@ export class ProductIndividualDesktopComponent implements OnInit,OnDestroy {
     this.selectedData['isSelected'] = (e?.target?.innerText === this.selectedData.size &&
                                         this.selectedData.isSelected === true) ?
                                         false : true;
-    this.selectedData.size = e?.target?.innerText
-    this.selectedData = {...this.selectedData}
+
+    this.selectedData = {...this.selectedData,size: e?.target?.innerText}
+    this.selectedProduct = {
+      ...this.selectedProduct,
+      productSize: e?.target?.innerText,
+      variantId:this.selectedProduct.variants
+                .filter((v:any) => v.size === this.selectedData.size)[0].variantId
+    }
     //Copying the object again so that the input is detected in the child component.
-    // console.log(this.selectedData);
+    console.log(this.selectedProduct);
   }
- priceFormatter():number{
+ priceFormatter(variants:any):string{
     // the amount gets 
-    const amount = this.selectedProduct?.variants?.edges
-                 ?.filter((edge:any)=>{
-                 return edge?.node?.title.toString() === this.selectedData.size.toString() 
-                 })[0]?.node?.priceV2?.amount
+    const amount = variants
+                 ?.filter(
+                  (edge:any)=>(edge?.node?.title.toString() === this.selectedData.size.toString())
+                  )[0]?.node?.priceV2?.amount
    
-    return Number(amount)
+    return amount
     
  }
   getTheAvailableSizes():string[]{
-    const sizes= this.selectedProduct?.variants?.edges
-    ?.map((edge:any)=>{
-      return edge?.node?.title.toString()
+    const sizes= this.selectedProduct?.variants?.
+      map((variant:any)=>{
+      return variant?.size
     })
 
     return sizes ? sizes : []
   }
+  addToCart(){
+    this.selectedProduct = {...this.selectedProduct, productSize:this.selectedData.size}
+    console.log("cart loaded",this.selectedProduct);
+    const buyerIdentity = {
+      customerAccessToken:"23e27abbb38acb5570097ae04586276d",
+      email:"Xenolveofficial@gmail.com",
+      phone:"6362612241",
+      countryCode:"IN"
+    }
+    this.store.dispatch(CartActions.addToCart({item:[this.selectedProduct],buyerIdentity:buyerIdentity}))
+  }
 
+  selectedProductFormatter(productDataFromAPI:any):Product{
+    
+      const product: Product = {
+          id: productDataFromAPI.id,
+          title: productDataFromAPI.title,
+          description: productDataFromAPI.description,
+          handle: productDataFromAPI.handle,
+          price:this.priceFormatter(productDataFromAPI.variants.edges),
+          // price: productDataFromAPI.priceRange.minVariantPrice.amount, // Assuming you want the minimum price
+          productSize: 'M', // Concatenate all variant titles
+          images: productDataFromAPI.images.edges.map((edge: any) => ({
+              originalSrc: edge.node.originalSrc,
+              altText: edge.node.altText || '' // Use empty string if altText is null
+          })),
+          variants: productDataFromAPI.variants.edges.map((edge:any)=>({
+            size:edge.node.title,
+            variantId:edge.node.id,
+            availableForSale:edge.node.availableForSale,
+            price:edge.node.priceV2.amount
+          })),
+          variantId:productDataFromAPI.variants.edges.
+            filter((edge:any)=>edge.node.title === 'M')[0].node.id
+      };
+  
+      return product;
+  
+  }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.

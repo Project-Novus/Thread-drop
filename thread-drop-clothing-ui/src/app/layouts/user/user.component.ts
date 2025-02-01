@@ -46,7 +46,7 @@ export class UserComponent implements OnInit {
   logout(){
     console.log("Log out")
     localStorage.removeItem("customerAccessToken");
-    this.router.navigate(['']);
+    this.router.navigate(['home']);
   }
 
 

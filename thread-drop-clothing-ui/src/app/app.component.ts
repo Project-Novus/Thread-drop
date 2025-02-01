@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { ShopifyService } from './core/services/shopify.service';
 import { AppState } from 'src/app/state/app.state';
 import * as ProductActions from '../app/state/product/product.actions'
+import * as CustomerActions from '../app/state/customer/customer.actions'
 import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { Store } from '@ngrx/store';
 export class AppComponent implements OnInit {
   title = 'THREAD DROP';
   isSplashVisible = true;
+  customerAccessToken: any;
   
   
   constructor(private router:Router, 
@@ -19,7 +21,15 @@ export class AppComponent implements OnInit {
     private store:Store<AppState>){}
   ngOnInit(): void {
     this.store.dispatch(ProductActions.loadProducts())
+    this.customerAccessToken = JSON.parse(localStorage.getItem('customerAccessToken') as string);
+    setTimeout(() => {
+      if(this.customerAccessToken){
+        this.store.dispatch(CustomerActions.alreadyLoggedIn({customerAccessToken:this.customerAccessToken}))
+      }
+    }, 500);
     this.showSplashScreen();
+    console.log(this.customerAccessToken);
+    
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
           return;

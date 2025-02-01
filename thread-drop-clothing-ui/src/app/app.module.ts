@@ -7,26 +7,26 @@ import { CoreModule } from './core.module';
 import { SharedModule } from './shared.module';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 // import { EssentialsLayoutComponent } from './layouts/essentials-layout/essentials-layout.component';
-import { SignatureLayoutComponent } from './layouts/signature-layout/signature-layout.component';
+// import { SignatureLayoutComponent } from './layouts/signature-layout/signature-layout.component';
 // import { EliteLayoutComponent } from './layouts/elite-layout/elite-layout.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 // import { PremiumLayoutComponent } from './layouts/premium-layout/premium-layout.component';
 import { LuxuryLayoutComponent } from './layouts/luxury-layout/luxury-layout.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { FiltersectionComponent } from './shared/components/filtersection/filtersection.component';
-import { ProductComponent } from './features/product/product.component';
+import { ProductComponent } from './layouts/product-details-page/product.component';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { HttpLink } from 'apollo-angular/http';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { InMemoryCache } from '@apollo/client/core';
-import { UserComponent } from './features/user/user.component';
+import { UserComponent } from './layouts/user/user.component';
 import { LoginComponentComponent } from './shared/components/login-component/login-component.component';
 import { SignupComponent } from './shared/components/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductListItemComponent } from './shared/components/product-list-item/product-list-item.component';
 import { SizeSelectorComponent } from './shared/components/size-selector/size-selector.component';
-import { ProductPageComponent } from './shared/components/product-page/product-page.component';
-import { ProductIndividualMobileComponent } from './shared/components/product-individual-mobile/product-individual-mobile.component';
+import { ProductPageComponent } from './layouts/product-list-page/product-page.component';
+// import { ProductIndividualMobileComponent } from './shared/components/product-individual-mobile/product-individual-mobile.component';
 import { ProductIndividualDesktopComponent } from './shared/components/product-individual-desktop/product-individual-desktop.component';
 import { FilterChipsComponent } from './shared/components/filtersection/filter-chips/filter-chips.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,11 +36,11 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppStateModule } from './state/app-state.module'
+import { ComingSoonComponent } from './shared/components/coming-soon/coming-soon.component';
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
-    SignatureLayoutComponent,
     NavbarComponent,
     FooterComponent,
     LuxuryLayoutComponent,
@@ -52,9 +52,9 @@ import { AppStateModule } from './state/app-state.module'
     ProductListItemComponent,
     SizeSelectorComponent,
     ProductPageComponent,
-    ProductIndividualMobileComponent,
     ProductIndividualDesktopComponent,
-    FilterChipsComponent
+    FilterChipsComponent,
+    ComingSoonComponent
   ],
   imports: [
     BrowserModule,

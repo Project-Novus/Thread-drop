@@ -1,0 +1,28 @@
+<main class="min-h-[90vh] bg-black flex justify-center items-center">
+    <div class="countdown-timer">
+        <ng-container *ngIf="!timeRemaining.expired; else expired">
+          <div class="timer-item">
+            <div class="value">{{ padNumber(timeRemaining.days) }}</div>
+            <div class="label">Days</div>
+          </div>
+          <div class="timer-item">
+            <div class="value">{{ padNumber(timeRemaining.hours) }}</div>
+            <div class="label">Hours</div>
+          </div>
+          <div class="timer-item">
+            <div class="value">{{ padNumber(timeRemaining.minutes) }}</div>
+            <div class="label">Minutes</div>
+          </div>
+          <div class="timer-item">
+            <div class="value">{{ padNumber(timeRemaining.seconds) }}</div>
+            <div class="label">Seconds</div>
+          </div>
+        </ng-container>
+      
+        <ng-template #expired>
+          <div class="expired-message">
+            The countdown has expired!
+          </div>
+        </ng-template>
+      </div>
+</main>
