@@ -1,10 +1,11 @@
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { gsap } from 'gsap';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit,OnChanges {
   @Input() scroll: boolean = false;
@@ -57,5 +58,29 @@ export class NavbarComponent implements OnInit,OnChanges {
     this.underline2?.nativeElement?.classList.add("nav-underline-white")
     this.underline3?.nativeElement?.classList.add("nav-underline-white")
     this.underline4?.nativeElement?.classList.add("nav-underline-white")
+  }
+
+  menuClick(val:boolean){
+   if(val=== true){
+    this.showMenuAnimation()
+   }else{
+    this.hideMenuAnimation()
+   }
+  }
+
+  showMenuAnimation(){
+    gsap.fromTo('.sidenav',{
+      x:'-100%',
+      
+    },{
+       x:'0',
+       duration:0.1
+      })
+    }
+    hideMenuAnimation(){
+      gsap.to('.sidenav',{
+        x: '-100%',
+        duration:0.1
+    })
   }
 }

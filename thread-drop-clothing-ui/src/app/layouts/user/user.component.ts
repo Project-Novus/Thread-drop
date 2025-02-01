@@ -23,6 +23,12 @@ export class UserComponent implements OnInit {
     this.isLoggedIn = this.customerAccessToken ? true : false;
     if(this.isLoggedIn)
     this.getCustomerData()  
+
+
+    this.customerStateService.createCustomerAddress({
+      address1:"Test",
+      city:"Test City",
+    },this.customerAccessToken.accessToken)
   }
   loginEvent(event:any){
     this.isLoggedIn = event.isLoggedIn;
@@ -40,6 +46,8 @@ export class UserComponent implements OnInit {
   logout(){
     console.log("Log out")
     localStorage.removeItem("customerAccessToken");
-    this.router.navigate(['']);
+    this.router.navigate(['home']);
   }
+
+
 }

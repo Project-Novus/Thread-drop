@@ -1,7 +1,10 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { ShopifyService } from './core/services/shopify.service';
-
+import { AppState } from 'src/app/state/app.state';
+import * as ProductActions from '../app/state/product/product.actions'
+import * as CustomerActions from '../app/state/customer/customer.actions'
+import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,14 +13,23 @@ import { ShopifyService } from './core/services/shopify.service';
 export class AppComponent implements OnInit {
   title = 'THREAD DROP';
   isSplashVisible = true;
-  @ViewChild('backgroundVideo') backgroundVideo!: ElementRef<HTMLVideoElement>;
-  userInteracted: boolean =false;
-  constructor(private router:Router, private shopifyService:ShopifyService){}
+  customerAccessToken: any;
+  
+  
+  constructor(private router:Router, 
+    private shopifyService:ShopifyService,
+    private store:Store<AppState>){}
   ngOnInit(): void {
-    // this.createCustomer()
-    // this.loginCustomer()
-    // this.recoverPassword()
+    this.store.dispatch(ProductActions.loadProducts())
+    this.customerAccessToken = JSON.parse(localStorage.getItem('customerAccessToken') as string);
+    setTimeout(() => {
+      if(this.customerAccessToken){
+        this.store.dispatch(CustomerActions.alreadyLoggedIn({customerAccessToken:this.customerAccessToken}))
+      }
+    }, 500);
     this.showSplashScreen();
+    console.log(this.customerAccessToken);
+    
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
           return;
@@ -45,30 +57,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  createCustomer(){
-    const input = {
-      firstName: "Faizan",
-      lastName: "Shariff",
-      email: "mrfaizanshariff@gmail.com",
-      password: "PLAYstation3"
-    };
-    this.shopifyService.createCustomer(input).subscribe((response:any) => {
-      console.log(response,"Customer created");
-      
-    })
-  }
-  loginCustomer(){
-    this.shopifyService.customerLogin('mrfaizanshariff@gmail.com','PLAYstation3')
-    .subscribe((response:any) =>{console.log(response,"Customer authenticated");
-    this.shopifyService
-    .getCustomerData(response
-                    .data
-                    .customerAccessTokenCreate
-                    .customerAccessToken
-                    .accessToken)
-                    .subscribe((response:any) =>{console.log(response,"customer data")})
-    })
-  }
+ 
   recoverPassword(){
     this.shopifyService.recoverCustomerPassword('faizantherooster@gmail.com').subscribe((res)=>{
 
@@ -77,46 +66,7 @@ export class AppComponent implements OnInit {
     })
   }
 
-  // @ViewChild('videoPlayer') videoPlayer!: ElementRef;
-   @ViewChild('textElement') textElement!: ElementRef; 
-  //  ngAfterViewInit() { this.videoPlayer.nativeElement.play(); }
-   showText() { this.textElement.nativeElement.style.display = 'block'; }
-
-
-
-
-   onVideoLoaded(event: Event): void {
-    const video = this.backgroundVideo.nativeElement;
-    
-    
-    // If the user has interacted with the page, play the video
-    if (this.userInteracted) {
-      video.play().catch((err: any) => console.log('Play failed:', err));
-     
-    }
-  }
-
-  // Monitor video playback to loop between specific times
   
-
-  // Listen for user interaction to trigger the video play
-  @HostListener('window:click') onUserInteraction() {
-    this.playVideo();
-  }
-  @HostListener('window:scroll') onUserScroll() {
-    this.playVideo();
-  }
-
-  // Play video only after user interaction
-  playVideo(): void {
-    const video = this.backgroundVideo.nativeElement;
-    this.userInteracted = true; // User has interacted with the page
-    this.textElement.nativeElement.style.display = 'none';
-    // Attempt to play the video once user interaction is detected
-    if (video.paused) {
-      video.play().catch((err: any) => console.log('Play failed:', err));
-    }
-  }
 }
 
 

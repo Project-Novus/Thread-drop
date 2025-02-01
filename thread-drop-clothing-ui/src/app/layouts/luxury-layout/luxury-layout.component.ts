@@ -13,7 +13,7 @@ export class LuxuryLayoutComponent implements OnInit {
   scroll: boolean = false;
   matchMedia:any;
 
-  productData:Product[]=[
+  productData=[
     {
       productId:'1',
       productImg:'https://bluorng.com/cdn/shop/files/Untitled_Artwork_26938.jpg?v=1721028475&width=600',
@@ -72,25 +72,15 @@ export class LuxuryLayoutComponent implements OnInit {
     },
    
   ]
-  constructor(private router:Router) {
+  constructor() {
     gsap.registerPlugin(ScrollTrigger);  
     this.matchMedia=gsap.matchMedia();
-
-    // this.matchMedia.add("(min-width: 600px)",()=>{
-    //   this.scrollNavbarChanges("4% 4%","4% 5%")
-    // })
-    // this.matchMedia.add("(max-width: 599px)",()=>{
-    //   this.scrollNavbarChanges("1% 1%","1% 4%")
-    // })
    }
 
   ngOnInit(): void {
     
   }
-  onProductClick(prodId: string): void {
-    this.router.navigate([`luxury/${prodId}`], { queryParams: { from: 'luxury' } })
-  }
-  scrollNavbarChanges(startingPercentageString: string,endPercentageString: string) {
+    scrollNavbarChanges(startingPercentageString: string,endPercentageString: string) {
     
     gsap.from('.hero-section',{
       scrollTrigger:{
